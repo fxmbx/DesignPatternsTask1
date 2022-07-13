@@ -1,14 +1,15 @@
 using System.Net.Mail;
 using MimeKit;
+using  Microsoft.Extensions.Options;
 
 namespace BackendTraineesTask1.EmailService
 {
     public class EmailSender : IEmailSender
     {
         private readonly EmailConfiguration emailConfiguration;
-        public EmailSender(EmailConfiguration _emailconf)
+        public EmailSender(IOptions<EmailConfiguration> _emailconf)
         {
-            emailConfiguration= _emailconf;
+            emailConfiguration= _emailconf.Value;
         }
 
         public async Task SendMail(MailRequest mailRequest)

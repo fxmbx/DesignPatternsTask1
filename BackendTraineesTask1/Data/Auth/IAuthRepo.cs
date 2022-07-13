@@ -5,7 +5,7 @@ namespace BackendTraineesTask1.Data.Auth
 {
     public interface IAuthRepo
     {
-        Task<ServiceResponse<AuthenticationResponse>> Register(UserRegisterDto req, string password);
+        Task<ServiceResponse<AuthenticationResponse>> Register(UserRegisterDto req);
         Task<ServiceResponse<AuthenticationResponse>> Login(UserLoginDto req);
 
     }

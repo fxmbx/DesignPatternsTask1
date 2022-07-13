@@ -31,7 +31,7 @@
                           if(!IsValidPassword(req.Password, userData.Password)){
 
                               response.Success = false;
-                              response.Message ="Invalid Credentials 😞";
+                              response.Message ="username or password incorrect 😞";
                               return response;
 
                           }
@@ -39,6 +39,9 @@
                           response.Message = "Login Succes 😄";
                           response.Data = new AuthenticationResponse(userData, jwtToken);
                           response.Success = true;
+                      }else{
+                          response.Message = "username or password incorrect 😞";
+                          response.Success = false;
                       }
 
                 }
@@ -71,7 +74,11 @@
                     
                             response.Message = "Account Created and Signed In 😉";
                             response.Data = new AuthenticationResponse(user, jwtToken);
+                    }else{
+                          response.Message = "Username Exist";
+                          response.Success= false;
                     }
+
                 }catch (System.Exception ex)
                 {
                     

@@ -21,29 +21,31 @@ namespace BackendTraineesTask1.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> Register(UserRegisterDto req)
         {
-            if (!ModelState.IsValid)
+                System.Console.WriteLine("hello");
+            if (ModelState.IsValid)
             {
+                System.Console.WriteLine("hello");
               var response = await iauth.Register(req);
-              if(!response.Succes){
+              if(!response.Success){
                   return BadRequest(response);
               }
               return Ok(response);
             }
-            return BadRequest(response);
+            return BadRequest(ModelState);
 
         }
-        [HttpPost("Register")]
-        public void Login(UserLoginDto req)
+        [HttpPost("Login")]
+        public  async Task<IActionResult> Login(UserLoginDto req)
         {
-             if (!ModelState.IsValid)
+             if (ModelState.IsValid)
             {
               var response = await iauth.Login(req);
-              if(!response.Succes){
+              if(!response.Success){
                   return BadRequest(response);
               }
               return Ok(response);
             }
-            return BadRequest(response);
+            return BadRequest(ModelState);
         }
 
        
