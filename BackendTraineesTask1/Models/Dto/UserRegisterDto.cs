@@ -1,12 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BackendTraineesTask1.Models
+namespace BackendTraineesTask1.Models.Dto
 {
-    public class User
+    public class UserRegisterDto
     {
-        [Key]
-        public int Id { get; set; }
         [Required]
         public string? UserName { get; set; }
         public string? Password { get; set; }
@@ -16,10 +14,5 @@ namespace BackendTraineesTask1.Models
 
         public Enum.Roles Role { get; set; } = Enum.Roles.RegularUser;
        
-    
     }
-    
-    // public class Verify{
-    //     public bool isEmpty (string name) => (name == null);
-    // }
 }
