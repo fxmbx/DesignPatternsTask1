@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using BackendTraineesTask1.Data.Auth;
 using BackendTraineesTask1.EmailService;
 using BackendTraineesTask1.Services.UserService;
+using BackendTraineesTask1.Services.SmsService;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
@@ -37,6 +38,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 
 builder.Services.Configure<EmailConfiguration>(configuration.GetSection("MailSetting"));
 builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.Configure<TwilioSettings>(builder.Configuration.GetSection("Twilio"));
+builder.Services.AddTransient<ISmsService, SmsService>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

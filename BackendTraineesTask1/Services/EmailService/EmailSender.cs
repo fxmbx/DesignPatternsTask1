@@ -51,11 +51,11 @@ namespace BackendTraineesTask1.EmailService
                 {
                     // client.CheckCertificateRevocation = false;
 
-                    await client.ConnectAsync("smtp.aol.com", 465,useSsl:true);
+                    await client.ConnectAsync(emailConfiguration.Host, emailConfiguration.Port,useSsl:true);
                    
                     client.AuthenticationMechanisms.Remove("XOAUTH2");
                    
-                    await client.AuthenticateAsync("ftmicroservice@aol.com", "8yjs3FM#&aguren");
+                    await client.AuthenticateAsync(emailConfiguration.Mail,emailConfiguration.Password);
 
                     await client.SendAsync(emailMessage);
                 }catch (System.Exception ex)
