@@ -23,7 +23,6 @@
                 try
                 {
                       string  jwtToken;
-
                       var userData = await dbcontext.User.FirstOrDefaultAsync(x=>x.UserName == req.UserName);
                       
                       if(userData != null ){
@@ -60,7 +59,13 @@
                 try
                 {
                     string  jwtToken;
-                   
+
+                    if(req.Role.ToLower() != "RegularUser".ToLower() || req.Role.ToLower() !="BigBoyUser".ToLower()){
+                        response.Message= "calm down chief, the role wey you  system 😅 ";
+                        response.Success = false;
+                        return response;
+                    }
+
                     if(!await UserExist(req.UserName))
                     {
                             var user = new User

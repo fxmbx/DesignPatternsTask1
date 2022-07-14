@@ -13,7 +13,7 @@ namespace BackendTraineesTask1.Models.Dto
         [CompareAttribute("Password", ErrorMessage = "Password doesnt match")]
         public string? ConfrimPassword { get; set; }
 
-        public string? Role { get; set; } 
+        public string? Role { get; set; } = "RegularUser";
        
     }
 }
