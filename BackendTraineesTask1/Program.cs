@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using BackendTraineesTask1.Data.Auth;
 using BackendTraineesTask1.EmailService;
+using BackendTraineesTask1.Services.UserService;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
@@ -16,6 +17,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDataContext>(x => x.UseSqlServer(configuration.GetConnectionString("ConnectionString")));
 
+builder.Services.AddScoped<IAuthRepo,AuthRepo>();
+builder.Services.AddScoped<IUserService,UserService>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer( 
                
@@ -31,7 +34,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
                 }) ;
 
 
-builder.Services.AddScoped<IAuthRepo,AuthRepo>();
+
 builder.Services.Configure<EmailConfiguration>(configuration.GetSection("MailSetting"));
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 var app = builder.Build();

@@ -7,12 +7,13 @@ namespace BackendTraineesTask1.Models.Dto
     {
         [Required]
         public string? UserName { get; set; }
+        [Required]
         public string? Password { get; set; }
         [NotMapped]
         [CompareAttribute("Password", ErrorMessage = "Password doesnt match")]
         public string? ConfrimPassword { get; set; }
 
-        public Enum.Roles Role { get; set; } = Enum.Roles.RegularUser;
+        public string? Role { get; set; } 
        
     }
 }

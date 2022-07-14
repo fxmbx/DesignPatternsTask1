@@ -14,7 +14,7 @@ namespace BackendTraineesTask1.Models
         [CompareAttribute("Password", ErrorMessage = "Password doesnt match")]
         public string? ConfrimPassword { get; set; }
 
-        public Enum.Roles Role { get; set; } = Enum.Roles.RegularUser;
+        public string Role { get; set; } = "RegularUser";
        
     
     }

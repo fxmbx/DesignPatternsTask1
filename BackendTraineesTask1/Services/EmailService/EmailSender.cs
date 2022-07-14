@@ -1,6 +1,8 @@
 using System.Net.Mail;
 using MimeKit;
 using  Microsoft.Extensions.Options;
+using MimeKit.Cryptography;
+using MailKit.Security;
 
 namespace BackendTraineesTask1.EmailService
 {
@@ -49,20 +51,23 @@ namespace BackendTraineesTask1.EmailService
                 {
                     // client.CheckCertificateRevocation = false;
 
-                    await client.ConnectAsync("smtp.gmail.com", 465,useSsl:true);
+                    await client.ConnectAsync("smtp.aol.com", 465,useSsl:true);
                    
                     client.AuthenticationMechanisms.Remove("XOAUTH2");
-                    await client.AuthenticateAsync("ftmicroservice@gmail.com", "funbiandtoyin");
+                   
+                    await client.AuthenticateAsync("ftmicroservice@aol.com", "8yjs3FM#&aguren");
 
                     await client.SendAsync(emailMessage);
-                }catch 
+                }catch (System.Exception ex)
                 {
+                    System.Console.WriteLine(ex.Message);
                     throw;
                 }finally{
                     await client.DisconnectAsync(true);
                     client.Dispose();
                 }
             }
+            // "   at MailKit.Net.Smtp.SmtpStream.ReadAheadAsync(Boolean doAsync, CancellationToken cancellationToken)\n   at MailKit.Net.Smtp.SmtpStream.ReadResponseAsync(Boolean doAsync, CancellationToken cancellationToken)\n   at MailKit.Net.Smtp.SmtpClient.SendCommandAsync(String command, Boolean doAsync, CancellationToken cancellationToken)\n   at MailKit.Net.Smtp.SmtpClient.AuthenticateAsync(Encoding encoding, ICredentials credentials, Boolean doAsync, CancellationToken cancellationToken)\n   at BackendTraineesTask1.EmailService.EmailSender.SendAsync(MimeMessage emailMessage) in /Users/aurora/Funbi_Node_Tut/SAEDTrainee/BackendTraineesTask1/BackendTraineesTask1/Services/EmailService/EmailSender.cs:line 60"
         }
     }
 }

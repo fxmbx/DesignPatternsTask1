@@ -66,7 +66,8 @@
                             var user = new User
                             {
                                 UserName = req.UserName,
-                                Password =BCrypt.Net.BCrypt.EnhancedHashPassword(req.Password)
+                                Password =BCrypt.Net.BCrypt.EnhancedHashPassword(req.Password),
+                                Role = req.Role
                             };
                             await dbcontext.User.AddAsync(user);
                             await dbcontext.SaveChangesAsync(true);
@@ -109,7 +110,7 @@
                     Subject = new ClaimsIdentity( new Claim[]{
                         new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                         new Claim(ClaimTypes.Name, user.UserName),
-                        new Claim(ClaimTypes.Role, user.Role.ToString()),
+                        new Claim(ClaimTypes.Role, user.Role),
                     
                     }),
                     Expires = DateTime.Now.AddHours(1),
